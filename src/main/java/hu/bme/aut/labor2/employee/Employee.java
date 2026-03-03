@@ -6,6 +6,7 @@ public class Employee {
 
     private Long id;
     private String name;
+    private String job;
     private int salary;
     private LocalDateTime workStart;
 
@@ -14,6 +15,7 @@ public class Employee {
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", job='" + job + '\'' +
                 ", salary=" + salary +
                 ", workStart=" + workStart +
                 '}';
@@ -22,6 +24,7 @@ public class Employee {
     public Employee(Long id, String name, int salary, LocalDateTime workStart) {
         this.id = id;
         this.name = name;
+        this.job = job;
         this.salary = salary;
         this.workStart = workStart;
     }
@@ -41,6 +44,10 @@ public class Employee {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getJob() { return job; }
+
+    public void setJob(String job) {}
 
     public int getSalary() {
         return salary;

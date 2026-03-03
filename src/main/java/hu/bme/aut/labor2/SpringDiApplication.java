@@ -1,21 +1,24 @@
 package hu.bme.aut.labor2;
 
 import hu.bme.aut.labor2.employee.Employee;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.time.LocalDateTime;
-import java.time.Month;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class SpringDiApplication {
-    static void main() {
-        try(var ctx = new ClassPathXmlApplicationContext("spring.xml")) {
-            SalaryService salaryService = ctx.getBean(SalaryService.class);
-            Employee employee = new Employee(1L, "Kovács Péter", 500000, LocalDateTime.of(2020, Month.JANUARY, 1, 0, 0, 0));
-            System.out.println("emelés előtt:" + employee.getSalary());
-            salaryService.setNewSalary(employee);
-            System.out.println("emelés után:" + employee.getSalary());
-        }
+@SpringBootApplication
+public class SpringDiApplication implements CommandLineRunner {
+    @Autowired
+    private SalaryService salaryService;
+    static void main(String[] args) {
+        SpringApplication.run(SpringDiApplication.class, args);
+    }
+    @Override
+    public void run(String... args) throws Exception {
+        Employee employee = new Employee(1L, "Kovács Péter", 450_000, LocalDateTime.of(2005, 5, 1, 8, 0, 0));
+        System.out.println("Alkalmazott emelés előtt: " + employee.toString());
+        salaryService.setNewSalary(employee);
+        System.out.println("Alkalmazott emelés után: " + employee.toString());
     }
 }
